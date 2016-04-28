@@ -1,7 +1,10 @@
-test = {
+let test = {
     a: 1,
     b: 2,
-    c: function() { console.log( this.a, this.b ) }
+    c(arg="testing") {
+        console.log(`a=${this.a} and b=${this.b} and arg=${arg}`)
+    }
 }
 
 test.c()
+test.c("blargh")
