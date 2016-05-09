@@ -39,15 +39,8 @@ g_container.mouseup = function(mouseData)
 g_container.mousemove = function(mouseData)
 {
     g_lastMousePos = {x: g_mousePos.x, y: g_mousePos.y};
-    g_mousePos = mouseData.data.global;
-    //console.log("last");
-    //console.log(g_lastMousePos);
-    //console.log("now");
-    //console.log(g_mousePos);
-    //console.log((g_mousePos.x - g_lastMousePos.x));
+    g_mousePos = {x: mouseData.data.global.x, y: mouseData.data.global.y};
     g_mouseDelta = {x: g_mousePos.x - g_lastMousePos.x, y: g_mousePos.y - g_lastMousePos.y};
-    //console.log(g_mousePos);
-    //console.log(g_mouseDelta);
 
     if (g_mouseDown)
         platter.onMouseDrag();
@@ -55,8 +48,6 @@ g_container.mousemove = function(mouseData)
 
 function update()
 {
-
-
     platter.update();
 
     platter.render();

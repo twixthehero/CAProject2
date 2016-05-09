@@ -50,8 +50,7 @@ function Platter()
         if (this.index != -1)
         {
             //console.log(g_mouseDelta);
-
-            //this.spots[this.index].move(g_mouseDelta);
+            this.spots[this.index].move(g_mouseDelta);
         }
     };
 
