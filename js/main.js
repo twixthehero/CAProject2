@@ -57,8 +57,12 @@ function update()
 };
 
 document.body.appendChild(g_renderer.view);
-var platter = new Platter();
+let platter = new Platter();
 platter.init();
+let timer = new Tone.Loop(function(time)
+{
+    platter.play();
+}, "1m").start();
 
 requestAnimationFrame(update);
 
@@ -81,13 +85,28 @@ function init()
         minTempo: MIN_TEMPO,
         maxTempo: MAX_TEMPO,
         minPitch: MIN_PITCH,
-        maxPitch: MAX_PITCH
+        maxPitch: MAX_PITCH,
+        preset: function()
+        {
+            platter.loadPreset();
+        },
+        delete: function()
+        {
+            platter.deleteAll();
+        },
+        docs: function()
+        {
+            window.open("docs.html");
+        }
     };
 
     var minTCont = gui.add(settings, "minTempo", 20, 120);
     var maxTCont = gui.add(settings, "maxTempo", 120, 240);
     var minPCont = gui.add(settings, "minPitch", 27.5, 2000);
     var maxPCont = gui.add(settings, "maxPitch", 2000, 4186);
+    gui.add(settings, "preset");
+    gui.add(settings, "delete");
+    gui.add(settings, "docs");
 
     minTCont.onChange(function(value)
     {
@@ -128,5 +147,6 @@ function addGui(gui)
 
 function removeGui(gui)
 {
-    g_guiContainer.removeChild(gui.domElement);
+    if (gui.domElement.parentNode != undefined)
+        g_guiContainer.removeChild(gui.domElement);
 }
