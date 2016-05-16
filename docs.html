@@ -6,11 +6,15 @@
     <meta charset="utf-8">
 
     <style>
-
-    body
+    
+    p
     {
-        margin: 0;
-        padding: 0;
+        width: 45%;
+    }
+    
+    li
+    {
+        list-style: none;
     }
 
     </style>
@@ -18,7 +22,34 @@
 
 <body>
     <h2>Documentation</h2>
-    <p></p>
+    <h3>Goal</h3>
+    <p>My overall goal with this project was to create a new digital musical instrument. My
+    original design was to create a graph for the composer to use. The X axis of the graph
+    would align to the tempo of a note while the Y axis of the graph would align to the pitch
+    f the played notes. The composer can click on the canvas to place a note (called a "Spot") which
+    holds a pattern that would be repeatted ever one musical measure. This spot can then be dragged
+    around and would update it's pitch/tempo based on it's position. This would allow for dynamically
+    changing the note while it/they are currently playing.</p>
+    <p>The user can place/delete spots from the screen by clicking and using the delete checkbox.
+    Pitch for each spot changes live when it is dragged around. Each spot's color and radius can be
+    changed. The tempo axis was never implemented due to issues (see below) with Tone.js.</p>
+    <h3>Issues</h3>
+    <p>
+    Tone.js does not handle musical rests, so I wrote my own notation based on theirs that
+    would parse the pattern, then calculate the correct timestamps for additional notes in the
+    pattern after a rest. For example, the pattern 8n8n8r8n would end up as an array
+    <ul>
+    <li>[["0:0", <frequency>],</li>
+    <li>["0:0:2", <frequency>],</li>
+    <li>["0:1:0", <frequency>],</li>
+    <li>["0:1:2", <frequency>]]</li>
+    </ul>
+    for use in the SimpleSynth.
+    </p>
+    <p>After working with Tone.js for syncing music patterns, I encountered a big issue with my
+    code framework where the very first note of a pattern was never played. After hours of testing,
+    I was unable to figure out why it ended up this way. Upon creating a test project, it worked
+    as intended, but I was unable to replicate the same functionality in the full project.</p>
 </body>
 
 </html>
